@@ -8,7 +8,7 @@ const {
   GraphQLSchema,
   GraphQLID,
   // GraphQLInt,
-  // GraphQLList,
+  GraphQLList,
   // GraphQLNonNull,
   GraphQLFloat
 } = graphql
@@ -26,6 +26,12 @@ const ExpenseType = new GraphQLObjectType({
       type: GraphQLFloat
     },
     currency: {
+      type: GraphQLString
+    },
+    categoryId: {
+      type: GraphQLString
+    },
+    userId: {
       type: GraphQLString
     },
     category: {
@@ -47,7 +53,7 @@ const CategoryType = new GraphQLObjectType({
       type: GraphQLString
     },
     expenses: {
-      type: ExpenseType,
+      type: new GraphQLList(ExpenseType),
       resolve (parent, args) {
         return Expense.find({
           categoryId: parent.id
@@ -91,6 +97,18 @@ const RootQuery = new GraphQLObjectType({
           })
         }
         return null
+      }
+    },
+    categories: {
+      type: new GraphQLList(CategoryType),
+      resolve (parent, args) {
+        return Category.find({})
+      }
+    },
+    expenses: {
+      type: new GraphQLList(ExpenseType),
+      resolve (parent, args) {
+        return Expense.find({})
       }
     }
   }
