@@ -1,6 +1,7 @@
 const graphql = require('graphql')
 const Category = require('../models/category')
 const Expense = require('../models/expense')
+const User = require('../models/user')
 
 const {
   GraphQLObjectType,
@@ -63,9 +64,48 @@ const CategoryType = new GraphQLObjectType({
   })
 })
 
+const UserType = new GraphQLObjectType({
+  name: 'User',
+  fields: () => ({
+    id: {
+      type: GraphQLID
+    },
+    email: {
+      type: GraphQLString
+    },
+    expenses: {
+      type: new GraphQLList(ExpenseType),
+      resolve (parent, args) {
+        return Expense.find({
+          userId: parent.id
+        })
+      }
+    },
+    categories: {
+      type: new GraphQLList(CategoryType),
+      resolve (parent, args) {
+        return Expense.find({
+          userId: parent.id
+        })
+      }
+    }
+  })
+})
+
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
+    user: {
+      type: UserType,
+      args: {
+        id: {
+          type: GraphQLID
+        }
+      },
+      resolve (parent, args) {
+        return User.findById(args.id)
+      }
+    },
     expense: {
       type: ExpenseType,
       args: {
