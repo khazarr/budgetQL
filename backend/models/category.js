@@ -6,4 +6,4 @@ const CategorySchema = new Schema({
   userId: String
 })
 
-module.exports = moongose.model('Category', CategorySchema)
+module.exports = moongose.model('Category', CategorySchema, 'categories')

@@ -70,6 +70,28 @@ const RootQuery = new GraphQLObjectType({
       resolve (parent, args) {
         return Expense.findById(args.id)
       }
+    },
+    category: {
+      type: CategoryType,
+      args: {
+        id: {
+          type: GraphQLID
+        },
+        title: {
+          type: GraphQLString
+        }
+      },
+      resolve (parent, args) {
+        if (args.id) {
+          return Category.findById(args.id)
+        }
+        if (args.title) {
+          return Category.findOne({
+            title: args.title
+          })
+        }
+        return null
+      }
     }
   }
 })
