@@ -3,12 +3,20 @@ import { Link } from 'react-router-dom'
 
 const Navbar = (props) => {
   return (
-    <nav className='nav-wrapper grey darken-3'>
+    <nav className='nav-wrapper cyan darken-3'>
       <div className='container'>
-        <Link to='/' className='brand-logo'> Home </Link>
-        <Link to='/signIn' className='brand-logo'> SignIn </Link>
-        <Link to='/signUp' className='brand-logo'> SignUp </Link>
-        <Link to='/dashboard' className='brand-logo'> Dashboard </Link>
+        <Link to='/' className='brand-logo'> BudgetQL </Link>
+        <ul className='right'>
+          <li>
+            <Link to='/signIn'> SignIn </Link>
+          </li>
+          <li>
+            <Link to='/signUp'> SignUp </Link>
+          </li>
+          <li>
+            <Link to='/dashboard'> Dashboard </Link>
+          </li>
+        </ul>
       </div>
     </nav>
   )

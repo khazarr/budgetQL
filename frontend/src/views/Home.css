@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  height: calc(100vh - 64px);
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper__buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  margin: 0 15px;
+}
