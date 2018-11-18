@@ -8,9 +8,7 @@ const {
   GraphQLString,
   GraphQLSchema,
   GraphQLID,
-  // GraphQLInt,
   GraphQLList,
-  // GraphQLNonNull,
   GraphQLFloat
 } = graphql
 
